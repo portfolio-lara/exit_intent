@@ -96,7 +96,7 @@ setTimeout(() => {
 
 function displayPopup() {
     if (sessionStorage.getItem('popupAlreadyShown')) {
-        console.log('already cookie')
+        
         return
     }
     modal.style.display = 'block'
@@ -105,7 +105,6 @@ function displayPopup() {
 function closePopup() {
     modal.style.display = 'none'
     sessionStorage.setItem('popupAlreadyShown', 'true')
-    console.log('pop up closed')
-    console.log(sessionStorage.getItem('popupAlreadyShown') + 'session')
+
   }
 
