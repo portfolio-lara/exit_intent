@@ -53,11 +53,18 @@ if(window.innerWidth < 500){
   }
 
 //actual behaviour
-const exitEvent = e => {
+var exitEvent = e => {
   if (!e.toElement && !e.relatedTarget && e.clientY < 5) {
     document.removeEventListener('mouseout', exitEvent)
     displayPopup()
   }
+}
+
+var exitEventVisibility = e =>{
+    if (!e.toElement && !e.relatedTarget && document.visibilityState === 'hidden') {
+        document.removeEventListener('visibilitychange', exitEvent)
+        displayPopup()
+      }
 }
 
 // window.onclick = (e) => {
@@ -81,19 +88,17 @@ setTimeout(() => {
   document.addEventListener('mouseout', exitEvent)
 }, 1500)
 
-document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'hidden') {
-    setTimeout(() =>{
-        displayPopup()
-      }, 1500)
-    }
-  })
+
+setTimeout(() => {
+    document.addEventListener('visibilitychange', exitEventVisibility)
+  }, 1500)
+
+
 function displayPopup() {
     if (sessionStorage.getItem('popupAlreadyShown')) {
         console.log('already cookie')
         return
     }
-
     modal.style.display = 'block'
   }
   
